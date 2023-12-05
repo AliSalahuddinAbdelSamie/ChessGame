@@ -1,2 +1,3 @@
 # ChessGame
-simple chessgame made in java
+
+A simple Java ChessGame
