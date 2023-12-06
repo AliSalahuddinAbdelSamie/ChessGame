@@ -2052,7 +2052,7 @@ public class BoardFrame extends javax.swing.JFrame {
             for(int j=0;j<8;j++){
                 panel=map.get(changePosToName(i,j));
                 if(board.getSquare(i, j).getPiece()==null){
-                    
+                        
                     panel.removeAll();
                     panel.repaint();
                 }
@@ -2209,6 +2209,8 @@ public class BoardFrame extends javax.swing.JFrame {
              dest=(myPanel) evt.getSource();
             else {
                 JLabel label=(JLabel)evt.getSource();
+                if(label.getName().equals("WK")||label.getName().equals("BK"))
+                return false;
                 dest=(myPanel)label.getParent();
             }
             if(parent==null)
@@ -2216,6 +2218,7 @@ public class BoardFrame extends javax.swing.JFrame {
             if(game.isValidMove(parent.getName(), dest.getName())){
                 gameHistory.push(game.savepoint());
             }
+            
             if(game.playGame(parent.getName(), dest.getName())){
                 
                 

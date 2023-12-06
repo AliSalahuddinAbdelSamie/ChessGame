@@ -147,6 +147,7 @@ public class ChessGame  {
         }
         if(d.getPiece() instanceof King)
             return false;
+                  
         Piece capturedPiece=d.getPiece();
         currentMove=new Move(s,d);
         capturedPieceSquare=d;
