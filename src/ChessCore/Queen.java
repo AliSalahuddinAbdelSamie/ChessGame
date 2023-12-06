@@ -9,9 +9,9 @@ package ChessCore;
  * @author Aly
  */
 public class Queen extends Piece {
-    public Queen(PieceColor color)
+    public Queen(PieceColor color,String name)
     {
-        super(color);
+        super(color,name);
     }
 
     @Override
@@ -22,6 +22,12 @@ public class Queen extends Piece {
 
     @Override
     public boolean isValidMove(Move move) {
-        return new Rook(super.getColor()).isValidMove(move)|| new Bishop(super.getColor()).isValidMove(move);
+        return new Rook(super.getColor(),"temp").isValidMove(move)|| new Bishop(super.getColor(),"temp").isValidMove(move);
+    }
+    @Override
+    public Piece copy(){
+        Queen copy=new Queen(this.getColor(),this.getName());
+        copy.setHasMoved(this.getHasMoved());
+        return copy;
     }
 }

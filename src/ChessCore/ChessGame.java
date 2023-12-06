@@ -5,9 +5,10 @@
 package ChessCore;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class ChessGame  {
-    private final Board board;
+    private Board board;
     private Move lastMove;
     private final Player player1;
     private final Player player2;
@@ -17,6 +18,7 @@ public class ChessGame  {
     private Square capturedPieceSquare;
     private Square rookAvailableToCastleSquare;
     private Square rookDestinationAfterCastle; 
+    
     public ChessGame(){
         board=new Board();
         lastMove=null;
@@ -28,8 +30,13 @@ public class ChessGame  {
         rookAvailableToCastleSquare=null;
         rookDestinationAfterCastle=null;
     }
-    
-    
+
+    public Board getBoard() {
+        return board;
+    }
+    public boolean isValidMove(String source,String dest){
+        return isValidMove(new Move(changeNameToSquare(source),changeNameToSquare(dest)));
+    }
     public boolean isValidMove(Move move){
         
         
@@ -144,7 +151,7 @@ public class ChessGame  {
         currentMove=new Move(s,d);
         capturedPieceSquare=d;
         if(isValidMove(currentMove))
-        {
+        {     
             currentMove.getSource().getPiece().setHasMoved(true);
             lastMove=currentMove; 
             d.setPiece(s.getPiece());
@@ -212,22 +219,22 @@ public class ChessGame  {
         Square d=currentMove.getDestination();
         switch (promotion){
                     case 'K': 
-                    d.setPiece(new Knight(d.getPiece().getColor()));
+                    d.setPiece(new Knight(d.getPiece().getColor(),d.getPiece().getName()));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
                 case 'B':
-                    d.setPiece(new Bishop(d.getPiece().getColor()));
+                    d.setPiece(new Bishop(d.getPiece().getColor(),d.getPiece().getName()));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
                 case 'R':
-                    d.setPiece(new Rook(d.getPiece().getColor()));
+                    d.setPiece(new Rook(d.getPiece().getColor(),d.getPiece().getName()));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
                 case 'Q':
-                    d.setPiece(new Queen(d.getPiece().getColor()));
+                    d.setPiece(new Queen(d.getPiece().getColor(),d.getPiece().getName()));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
@@ -419,5 +426,73 @@ public class ChessGame  {
         status=updateStatusForCheck();
         return capturedPiece;
     }
-   
+    public Memento savepoint(){
+        return new Memento(board,lastMove,currentPlayer,status,currentMove,capturedPieceSquare,rookAvailableToCastleSquare,rookDestinationAfterCastle);
+    }
+    public void restoreToSavepoint(Memento memento){
+        this.board=memento.getBoard();
+        this.lastMove=memento.getLastMove();
+        this.currentPlayer=memento.getCurrentPlayer();
+        this.status=memento.getStatus();
+        this.currentMove=memento.getCurrentMove();
+        this.capturedPieceSquare=memento.getCapturedPieceSquare();
+        this.rookAvailableToCastleSquare=memento.getRookAvailableToCastleSquare();
+        this.rookDestinationAfterCastle=memento.getRookDestinationAfterCastle();
+    }
+    
+    public static class Memento{
+        private final Board board;
+        private final Move lastMove;
+        private final Player currentPlayer;
+        private final GameStatus status;
+        private final Move currentMove;
+        private final Square capturedPieceSquare;
+        private final Square rookAvailableToCastleSquare;
+        private final Square rookDestinationAfterCastle;
+
+        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove, Square capturedPieceSquare, Square rookAvailableToCastleSquare, Square rookDestinationAfterCastle) {
+            this.board = new Board(board);
+            this.lastMove = lastMove;
+            this.currentPlayer = currentPlayer;
+            this.status = status;
+            this.currentMove = currentMove;
+            this.capturedPieceSquare = capturedPieceSquare;
+            this.rookAvailableToCastleSquare = rookAvailableToCastleSquare;
+            this.rookDestinationAfterCastle = rookDestinationAfterCastle;
+        }
+
+        private Board getBoard() {
+            return board;
+        }
+
+        private Move getLastMove() {
+            return lastMove;
+        }
+
+        private Player getCurrentPlayer() {
+            return currentPlayer;
+        }
+
+        private GameStatus getStatus() {
+            return status;
+        }
+
+        private Move getCurrentMove() {
+            return currentMove;
+        }
+
+        private Square getCapturedPieceSquare() {
+            return capturedPieceSquare;
+        }
+
+        private Square getRookAvailableToCastleSquare() {
+            return rookAvailableToCastleSquare;
+        }
+
+        private Square getRookDestinationAfterCastle() {
+            return rookDestinationAfterCastle;
+        }
+        
+        
+    }
 }

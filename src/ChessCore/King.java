@@ -5,8 +5,8 @@
 package ChessCore;
 
 public class King extends Piece {
-    public King(PieceColor color){
-        super(color);
+    public King(PieceColor color,String name){
+        super(color,name);
     }
 
     @Override
@@ -37,5 +37,11 @@ public class King extends Piece {
         }
         return false;
         
+    }
+    @Override
+    public Piece copy(){
+        King copy=new King(this.getColor(),this.getName());
+        copy.setHasMoved(this.getHasMoved());
+        return copy;
     }
 }

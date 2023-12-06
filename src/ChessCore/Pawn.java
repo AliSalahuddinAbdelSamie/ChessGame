@@ -6,8 +6,8 @@ package ChessCore;
 
 public class Pawn extends Piece {
     private Move lastMove;
-    public Pawn(PieceColor color){
-        super(color);  
+    public Pawn(PieceColor color,String name){
+        super(color,name);  
         lastMove=null;   
     }
 
@@ -68,6 +68,12 @@ public class Pawn extends Piece {
         }    
         return false;
     }
-    
+    @Override
+    public Piece copy(){
+        Pawn copy=new Pawn(this.getColor(),this.getName());
+        copy.setHasMoved(this.getHasMoved());
+        copy.setLastMove(this.lastMove);
+        return copy;
+    }
 
     }

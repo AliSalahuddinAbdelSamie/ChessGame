@@ -4,17 +4,28 @@
  */
 package ChessGui;
 
+import ChessCore.Bishop;
+import ChessCore.Board;
 import ChessCore.ChessGame;
+import ChessCore.ChessGame.Memento;
 import ChessCore.GameStatus;
+import ChessCore.King;
+import ChessCore.Knight;
 import ChessCore.Move;
 import ChessCore.MoveStatus;
+import ChessCore.Pawn;
 import ChessCore.PieceColor;
+import ChessCore.Queen;
+import ChessCore.Rook;
 import ChessCore.Square;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,19 +39,34 @@ public class BoardFrame extends javax.swing.JFrame {
     private ChessGame game;
     private HashMap<String,myPanel> map;
     private JPanel[] panelArray;
+    private JLabel[] labelArray;
     private ArrayList<Color> originalColors;
     private JLabel lastClicked;
+    private Stack<Memento> gameHistory;
+    private HashMap<String,myLabel> labelMap;
+    
     public BoardFrame() {
         initComponents();
+        gameHistory=new Stack<>();
         lastClicked=null;
         game=new ChessGame();
         map=new HashMap<>();
+        labelMap=new HashMap<>();
         originalColors=new ArrayList<>();
         panelArray = new JPanel[]   {a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, b3, b4, b5, b6, b7, b8,
                                     c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, d6, d7, d8,
                                     e1, e2, e3, e4, e5, e6, e7, e8, f1, f2, f3, f4, f5, f6, f7, f8,
                                     g1, g2, g3, g4, g5, g6, g7, g8, h1, h2, h3, h4, h5, h6, h7, h8};
-        
+        labelArray=new JLabel[]     {whiteRook1,whiteKnight1,whiteBishop1,whiteQueen,whiteKing,whiteBishop2,
+                                     whiteKnight2,whiteRook2,whitePawn1,whitePawn2,whitePawn3,whitePawn4,whitePawn5,
+                                     whitePawn6,whitePawn7,whitePawn8,blackRook1,blackKnight1,blackBishop1,blackQueen,
+                                     blackKing,blackBishop2,blackKnight2,blackRook2,blackPawn1,blackPawn2,blackPawn3,
+                                     blackPawn4,blackPawn5,blackPawn6,blackPawn7,blackPawn8
+                                     };
+        for(JLabel i:labelArray){
+            myLabel temp=(myLabel) i;
+            labelMap.put(temp.getName(), temp);
+        }
         for(JPanel i: panelArray){
             originalColors.add(i.getBackground());
             myPanel temp=(myPanel) i;
@@ -60,101 +86,102 @@ public class BoardFrame extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         a8 = new myPanel("a8");
-        blackRook1 = new javax.swing.JLabel();
+        blackRook1 = new myLabel("BR1");
         b8 = new myPanel("b8");
-        blackKnight1 = new javax.swing.JLabel();
+        blackKnight1 = new myLabel("BK1");
         b7 = new myPanel("b7");
-        blackPawn2 = new javax.swing.JLabel();
+        blackPawn2 = new myLabel("BP2");
         a7 = new myPanel("a7");
-        blackPawn1 = new javax.swing.JLabel();
+        blackPawn1 = new myLabel("BP1");
         a5 = new myPanel("a5");
         b5 = new myPanel("b5");
         b6 = new myPanel("b6");
         a6 = new myPanel("a6");
         a2 = new myPanel("a2");
-        whitePawn1 = new javax.swing.JLabel();
+        whitePawn1 = new myLabel("WP1");
         b2 = new myPanel("b2");
-        whitePawn2 = new javax.swing.JLabel();
+        whitePawn2 = new myLabel("WP2");
         b1 = new myPanel("b1");
-        whiteKnight1 = new javax.swing.JLabel();
+        whiteKnight1 = new myLabel("WK1");
         a1 = new myPanel("a1");
-        whiteRook1 = new javax.swing.JLabel();
+        whiteRook1 = new myLabel("WR1");
         a3 = new myPanel("a3");
         b3 = new myPanel("b3");
         b4 = new myPanel("b4");
         a4 = new myPanel("a4");
         d8 = new myPanel("d8");
-        blackQueen = new javax.swing.JLabel();
+        blackQueen = new myLabel("BQ");
         c3 = new myPanel("c3");
         c8 = new myPanel("c8");
-        blackBishop1 = new javax.swing.JLabel();
+        blackBishop1 = new myLabel("BB1");
         c1 = new myPanel("c1");
-        whiteBishop1 = new javax.swing.JLabel();
+        whiteBishop1 = new myLabel("WB1");
         d1 = new myPanel("d1");
-        whiteQueen = new javax.swing.JLabel();
+        whiteQueen = new myLabel("WQ");
         d2 = new myPanel("d2");
-        whitePawn4 = new javax.swing.JLabel();
+        whitePawn4 = new myLabel("WP4");
         c2 = new myPanel("c2");
-        whitePawn3 = new javax.swing.JLabel();
+        whitePawn3 = new myLabel("WP3");
         c6 = new myPanel("c6");
         d6 = new myPanel("d6");
         d5 = new myPanel("d5");
         c5 = new myPanel("c5");
         c4 = new myPanel("c4");
         c7 = new myPanel("c7");
-        blackPawn3 = new javax.swing.JLabel();
+        blackPawn3 = new myLabel("BP3");
         d4 = new myPanel("d4");
         d7 = new myPanel("d7");
-        blackPawn4 = new javax.swing.JLabel();
+        blackPawn4 = new myLabel("BP4");
         d3 = new myPanel("d3");
         f8 = new myPanel("f8");
-        blackBishop2 = new javax.swing.JLabel();
+        blackBishop2 = new myLabel("BB2");
         g6 = new myPanel("g6");
         e8 = new myPanel("e8");
-        blackKing = new javax.swing.JLabel();
+        blackKing = new myLabel("BK");
         g2 = new myPanel("g2");
-        whitePawn7 = new javax.swing.JLabel();
+        whitePawn7 = new myLabel("WP7");
         h2 = new myPanel("h2");
-        whitePawn8 = new javax.swing.JLabel();
+        whitePawn8 = new myLabel("WP8");
         h1 = new myPanel("h1");
-        whiteRook2 = new javax.swing.JLabel();
+        whiteRook2 = new myLabel("WR2");
         g1 = new myPanel("g1");
-        whiteKnight2 = new javax.swing.JLabel();
+        whiteKnight2 = new myLabel("WK2");
         g8 = new myPanel("g8");
-        blackKnight2 = new javax.swing.JLabel();
+        blackKnight2 = new myLabel("BK2");
         g3 = new myPanel("g3");
         h8 = new myPanel("h8");
-        blackRook2 = new javax.swing.JLabel();
+        blackRook2 = new myLabel("BR2");
         e4 = new myPanel("e4");
         f4 = new myPanel("f4");
         f3 = new myPanel("f3");
         e3 = new myPanel("e3");
         e1 = new myPanel("e1");
-        whiteKing = new javax.swing.JLabel();
+        whiteKing = new myLabel("WK");
         f1 = new myPanel("f1");
-        whiteBishop2 = new javax.swing.JLabel();
+        whiteBishop2 = new myLabel("WB2");
         h3 = new myPanel("h3");
         h7 = new myPanel("h7");
-        blackPawn8 = new javax.swing.JLabel();
+        blackPawn8 = new myLabel("BP8");
         f2 = new myPanel("f2");
-        whitePawn6 = new javax.swing.JLabel();
+        whitePawn6 = new myLabel("WP6");
         e2 = new myPanel("e2");
-        whitePawn5 = new javax.swing.JLabel();
+        whitePawn5 = new myLabel("WP5");
         e6 = new myPanel("e6");
         h4 = new myPanel("h4");
         f6 = new myPanel("f6");
         g7 = new myPanel("g7");
-        blackPawn7 = new javax.swing.JLabel();
+        blackPawn7 = new myLabel("BP7");
         f5 = new myPanel("f5");
         g4 = new myPanel("g4");
         e5 = new myPanel("e5");
         g5 = new myPanel("g5");
         e7 = new myPanel("e7");
-        blackPawn5 = new javax.swing.JLabel();
+        blackPawn5 = new myLabel("BP5");
         h5 = new myPanel("h5");
         f7 = new myPanel("f7");
-        blackPawn6 = new javax.swing.JLabel();
+        blackPawn6 = new myLabel("BP6");
         h6 = new myPanel("h6");
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ChessGame");
@@ -1685,6 +1712,13 @@ public class BoardFrame extends javax.swing.JFrame {
                         .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1692,13 +1726,20 @@ public class BoardFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1993,13 +2034,42 @@ public class BoardFrame extends javax.swing.JFrame {
         highlightAllValidDestinations(parent);
         lastClicked=temp;
     }//GEN-LAST:event_blackRook2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!gameHistory.empty()){
+        game.restoreToSavepoint(gameHistory.pop());
+        redrawBoard();
+        removeKingHighlight();
+        flipBoard();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
+    private void redrawBoard(){
+        Board board=game.getBoard();
+        myPanel panel;
+        JLabel label;
+        for(int i=0;i<8;i++)
+            for(int j=0;j<8;j++){
+                panel=map.get(changePosToName(i,j));
+                if(board.getSquare(i, j).getPiece()==null){
+                    
+                    panel.removeAll();
+                    panel.repaint();
+                }
+                else {
+                    label=labelMap.get(board.getSquare(i, j).getPiece().getName());
+                    panel.removeAll();
+                    panel.add(label);
+                    panel.repaint();
+                }
+                
+            }
+    }
     private void highlightAllValidDestinations(myPanel panel){
         ArrayList<Move> moves=game.getAllValidMovesFromSquare(panel.getName());
         removeHighlights();
         for (Move i:moves){
-        //System.out.println(i.getDestination().getRowPos()+" "+i.getDestination().getColPos());
-            
+   
            myPanel destination=(myPanel)map.get(changePosToName(i.getDestination()));
            destination.setBackground(new Color(153,255,153));
         }
@@ -2034,7 +2104,7 @@ public class BoardFrame extends javax.swing.JFrame {
         }
         else removeKingHighlight();
     }
-   
+    
     private String changePosToName(Square square) {
         char col=(char)(square.getColPos()+'a');
         String row=String.valueOf(square.getRowPos()+1);
@@ -2131,6 +2201,7 @@ public class BoardFrame extends javax.swing.JFrame {
 
     }
     private boolean updateBoard(MouseEvent evt){
+        Board board=game.getBoard();
         if(lastClicked!=null){
             myPanel parent=(myPanel)lastClicked.getParent();
              myPanel dest;
@@ -2142,20 +2213,13 @@ public class BoardFrame extends javax.swing.JFrame {
             }
             if(parent==null)
                 return false;
+            if(game.isValidMove(parent.getName(), dest.getName())){
+                gameHistory.push(game.savepoint());
+            }
             if(game.playGame(parent.getName(), dest.getName())){
-                myPanel toClear=(myPanel)map.get(changePosToName(game.getCapturedPieceSquare()));
-                toClear.removeAll();
-                toClear.repaint();
-                parent.removeAll();
-                dest.add(lastClicked);
-                if(game.getCurrentMoveStatus()==MoveStatus.CASTLING){
-                    myPanel rookBefore=(myPanel)map.get(changePosToName(game.getRookPositionBeforeCastle()));
-                    myPanel rookAfter=(myPanel)map.get(changePosToName(game.getRookPositionAfterCastle()));
-                    JLabel rookToMove=(JLabel)rookBefore.getComponent(0);
-                    rookBefore.removeAll();
-                    rookBefore.repaint();
-                    rookAfter.add(rookToMove);
-                }
+                
+                
+                redrawBoard();
                 if(game.getCurrentMoveStatus()==MoveStatus.PROMOTION){
                     String choice;
                     while(true){
@@ -2296,6 +2360,7 @@ public class BoardFrame extends javax.swing.JFrame {
     private javax.swing.JPanel h6;
     private javax.swing.JPanel h7;
     private javax.swing.JPanel h8;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel whiteBishop1;
     private javax.swing.JLabel whiteBishop2;

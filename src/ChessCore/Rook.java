@@ -5,8 +5,8 @@
 package ChessCore;
 
 public class Rook extends Piece {
-    public Rook(PieceColor color){
-        super(color);
+    public Rook(PieceColor color,String name){
+        super(color,name);
     }
 
     @Override
@@ -28,6 +28,12 @@ public class Rook extends Piece {
             
         }
         return false;
+    }
+    @Override
+    public Piece copy(){
+        Rook copy=new Rook(this.getColor(),this.getName());
+        copy.setHasMoved(this.getHasMoved());
+        return copy;
     }
     
 }

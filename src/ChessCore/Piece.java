@@ -7,11 +7,13 @@ package ChessCore;
 public abstract class Piece {
     private PieceColor color;
     private boolean hasMoved;
-    public Piece(PieceColor color){
+    String name;
+    public Piece(PieceColor color,String name){
         this.color=color;
         hasMoved=false;
+        this.name=name;
     }
-
+    
     public boolean getHasMoved() {
         return hasMoved;
     }
@@ -25,4 +27,10 @@ public abstract class Piece {
     }
    
     public abstract boolean isValidMove(Move move);
+
+    public String getName() {
+        return name;
+    }
+      
+    public abstract Piece copy();
 }

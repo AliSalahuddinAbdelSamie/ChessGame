@@ -7,32 +7,44 @@ package ChessCore;
 public class Board {
     private Square[][] squares;
     public Board(){
-        squares=new Square[8][8];
+        this.squares=new Square[8][8];
         setupBoard();
+    }
+    //copy constructor
+    public Board(Board board){
+        this.squares=new Square[8][8]; 
+        for(int i=0;i<8;i++)
+            for(int j=0;j<8;j++)
+            {
+                if(board.getSquare(i, j).getPiece()==null)
+                    this.squares[i][j]=new Square(i,j,null);
+                else 
+                this.squares[i][j]=new Square(i,j,board.getSquare(i, j).getPiece().copy());
+            }
     }
     public void setupBoard(){
         
-        squares[0][0]=new Square(0,0,new Rook(PieceColor.WHITE));
-        squares[0][1]=new Square(0,1,new Knight(PieceColor.WHITE));
-        squares[0][2]=new Square(0,2,new Bishop(PieceColor.WHITE));
-        squares[0][3]=new Square(0,3,new Queen(PieceColor.WHITE));
-        squares[0][4]=new Square(0,4,new King(PieceColor.WHITE));
-        squares[0][5]=new Square(0,5,new Bishop(PieceColor.WHITE));
-        squares[0][6]=new Square(0,6,new Knight(PieceColor.WHITE));
-        squares[0][7]=new Square(0,7,new Rook(PieceColor.WHITE));
+        squares[0][0]=new Square(0,0,new Rook(PieceColor.WHITE,"WR1"));
+        squares[0][1]=new Square(0,1,new Knight(PieceColor.WHITE,"WK1"));
+        squares[0][2]=new Square(0,2,new Bishop(PieceColor.WHITE,"WB1"));
+        squares[0][3]=new Square(0,3,new Queen(PieceColor.WHITE,"WQ"));
+        squares[0][4]=new Square(0,4,new King(PieceColor.WHITE,"WK"));
+        squares[0][5]=new Square(0,5,new Bishop(PieceColor.WHITE,"WB2"));
+        squares[0][6]=new Square(0,6,new Knight(PieceColor.WHITE,"WK2"));
+        squares[0][7]=new Square(0,7,new Rook(PieceColor.WHITE,"WR2"));
         for(int k=0;k<8;k++){
-            squares[1][k]=new Square(1,k,new Pawn(PieceColor.WHITE));
-            squares[6][k]=new Square(6,k,new Pawn(PieceColor.BLACK));
+            squares[1][k]=new Square(1,k,new Pawn(PieceColor.WHITE,"WP"+(k+1)));
+            squares[6][k]=new Square(6,k,new Pawn(PieceColor.BLACK,"BP"+(k+1)));
         }
         
-        squares[7][0]=new Square(7,0,new Rook(PieceColor.BLACK));
-        squares[7][1]=new Square(7,1,new Knight(PieceColor.BLACK));
-        squares[7][2]=new Square(7,2,new Bishop(PieceColor.BLACK));
-        squares[7][3]=new Square(7,3,new Queen(PieceColor.BLACK));
-        squares[7][4]=new Square(7,4,new King(PieceColor.BLACK));
-        squares[7][5]=new Square(7,5,new Bishop(PieceColor.BLACK));
-        squares[7][6]=new Square(7,6,new Knight(PieceColor.BLACK));
-        squares[7][7]=new Square(7,7,new Rook(PieceColor.BLACK));
+        squares[7][0]=new Square(7,0,new Rook(PieceColor.BLACK,"BR1"));
+        squares[7][1]=new Square(7,1,new Knight(PieceColor.BLACK,"BK1"));
+        squares[7][2]=new Square(7,2,new Bishop(PieceColor.BLACK,"BB1"));
+        squares[7][3]=new Square(7,3,new Queen(PieceColor.BLACK,"BQ"));
+        squares[7][4]=new Square(7,4,new King(PieceColor.BLACK,"BK"));
+        squares[7][5]=new Square(7,5,new Bishop(PieceColor.BLACK,"BB2"));
+        squares[7][6]=new Square(7,6,new Knight(PieceColor.BLACK,"BK2"));
+        squares[7][7]=new Square(7,7,new Rook(PieceColor.BLACK,"BR2"));
         
             
         
@@ -133,5 +145,5 @@ public class Board {
     }
     return count;
 }
-    
-}
+      
+}    

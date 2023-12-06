@@ -5,8 +5,8 @@
 package ChessCore;
 
 public class Bishop extends Piece {
-    public Bishop(PieceColor color){
-        super(color);
+    public Bishop(PieceColor color,String name){
+        super(color,name);   
     }
 
     @Override
@@ -27,5 +27,12 @@ public class Bishop extends Piece {
             
         }
         return false;
+    }
+    
+    @Override
+    public Piece copy(){
+        Bishop copy=new Bishop(this.getColor(),this.getName());
+        copy.setHasMoved(this.getHasMoved());
+        return copy;
     }
 }
