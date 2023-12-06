@@ -80,7 +80,7 @@ public class ChessGame  {
             undoMove(move,p,originalStatus);    
             return false;
     }
-    
+    //gets all valid moves from a target square
     public ArrayList<Move> getAllValidMovesFromSquare(Square source){
         ArrayList<Move> moves=new ArrayList<>();
          if (source == null ||source.isEmpty()) {
