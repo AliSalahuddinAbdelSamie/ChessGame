@@ -465,9 +465,6 @@
                   <Image iconType="3" name="/ChessGui/BlackRook.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackRook1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BR1&quot;);"/>
               </AuxValues>
@@ -511,9 +508,6 @@
                   <Image iconType="3" name="/ChessGui/BlackKnight.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackKnight1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BK1&quot;);"/>
               </AuxValues>
@@ -557,9 +551,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP2&quot;);"/>
               </AuxValues>
@@ -603,9 +594,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP1&quot;);"/>
               </AuxValues>
@@ -741,9 +729,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP1&quot;);"/>
               </AuxValues>
@@ -787,9 +772,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP2&quot;);"/>
               </AuxValues>
@@ -833,9 +815,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteKnight.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteKnight1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WK1&quot;);"/>
               </AuxValues>
@@ -879,9 +858,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteRook.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteRook1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WR1&quot;);"/>
               </AuxValues>
@@ -1017,9 +993,6 @@
                   <Image iconType="3" name="/ChessGui/BlackQueen.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackQueenMouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BQ&quot;);"/>
               </AuxValues>
@@ -1086,9 +1059,6 @@
                   <Image iconType="3" name="/ChessGui/BlackBishop.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackBishop1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BB1&quot;);"/>
               </AuxValues>
@@ -1132,9 +1102,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteBishop.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteBishop1MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WB1&quot;);"/>
               </AuxValues>
@@ -1178,9 +1145,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteQueen.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteQueenMouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WQ&quot;);"/>
               </AuxValues>
@@ -1224,9 +1188,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn4MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP4&quot;);"/>
               </AuxValues>
@@ -1270,9 +1231,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn3MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP3&quot;);"/>
               </AuxValues>
@@ -1431,9 +1389,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn3MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP3&quot;);"/>
               </AuxValues>
@@ -1501,9 +1456,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn4MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP4&quot;);"/>
               </AuxValues>
@@ -1570,9 +1522,6 @@
                   <Image iconType="3" name="/ChessGui/BlackBishop.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackBishop2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BB2&quot;);"/>
               </AuxValues>
@@ -1639,9 +1588,6 @@
                   <Image iconType="3" name="/ChessGui/BlackKing.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackKingMouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BK&quot;);"/>
               </AuxValues>
@@ -1685,9 +1631,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn7MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP7&quot;);"/>
               </AuxValues>
@@ -1731,9 +1674,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn8MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP8&quot;);"/>
               </AuxValues>
@@ -1777,9 +1717,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteRook.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteRook2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WR2&quot;);"/>
               </AuxValues>
@@ -1823,9 +1760,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteKnight.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteKnight2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WK2&quot;);"/>
               </AuxValues>
@@ -1869,9 +1803,6 @@
                   <Image iconType="3" name="/ChessGui/BlackKnight.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackKnight2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BK2&quot;);"/>
               </AuxValues>
@@ -1938,9 +1869,6 @@
                   <Image iconType="3" name="/ChessGui/BlackRook.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackRook2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BR2&quot;);"/>
               </AuxValues>
@@ -2076,9 +2004,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteKing.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteKingMouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WK&quot;);"/>
               </AuxValues>
@@ -2122,9 +2047,6 @@
                   <Image iconType="3" name="/ChessGui/WhiteBishop.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whiteBishop2MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WB2&quot;);"/>
               </AuxValues>
@@ -2191,9 +2113,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn8MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP8&quot;);"/>
               </AuxValues>
@@ -2237,9 +2156,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn6MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP6&quot;);"/>
               </AuxValues>
@@ -2283,9 +2199,6 @@
                   <Image iconType="3" name="/ChessGui/WhitePawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="whitePawn5MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;WP5&quot;);"/>
               </AuxValues>
@@ -2399,9 +2312,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn7MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP7&quot;);"/>
               </AuxValues>
@@ -2537,9 +2447,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn5MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP5&quot;);"/>
               </AuxValues>
@@ -2606,9 +2513,6 @@
                   <Image iconType="3" name="/ChessGui/BlackPawn.png"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="blackPawn6MouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new myLabel(&quot;BP6&quot;);"/>
               </AuxValues>

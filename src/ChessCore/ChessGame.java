@@ -146,7 +146,6 @@ public class ChessGame  {
                   
         Piece capturedPiece=d.getPiece();
         currentMove=new Move(s,d);
-       
         if(isValidMove(currentMove))
         {     
             currentMove.getSource().getPiece().setHasMoved(true);
@@ -155,7 +154,6 @@ public class ChessGame  {
             s.setPiece(null);
             if(currentMove.getStatus()==MoveStatus.ENPASSENT){
                 System.out.println("Enpassant");
-                
                 capturedPiece=board.getSquare(currentMove.getSource().getRowPos(), currentMove.getDestination().getColPos()).getPiece();        
                 board.getSquare(currentMove.getSource().getRowPos(), currentMove.getDestination().getColPos()).setPiece(null);
             }
@@ -164,9 +162,7 @@ public class ChessGame  {
                 int direction=getDirectionForCastling(currentMove);
                 System.out.println("Castle");
                 forRook=board.getRookIfAvailableForCastling(currentMove.getDestination().getPiece().getColor(), direction);
-                
                 forRook.getPiece().setHasMoved(true);
-                
                 board.getSquare(currentMove.getDestination().getRowPos(),currentMove.getDestination().getColPos()+(direction*-1)).setPiece(forRook.getPiece());
                 forRook.setPiece(null);
             }
@@ -198,11 +194,9 @@ public class ChessGame  {
     public GameStatus getStatus(){
         return status;
     }
-    
     public MoveStatus getCurrentMoveStatus(){
         return currentMove.getStatus();
     }
-    
     //handles promotion
     public PieceColor promotionHandling(char promotion){
         Player temp=(currentPlayer==player1)?player2:player1;

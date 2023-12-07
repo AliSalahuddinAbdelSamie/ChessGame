@@ -65,6 +65,7 @@ public class BoardFrame extends javax.swing.JFrame {
                                      };
         for(JLabel i:labelArray){
             myLabel temp=(myLabel) i;
+             i.addMouseListener(new mouseClickedLabel());
             labelMap.put(temp.getName(), temp);
         }
         for(JPanel i: panelArray){
@@ -78,6 +79,15 @@ public class BoardFrame extends javax.swing.JFrame {
     private class mouseClicked extends MouseAdapter{
         public void mousePressed(java.awt.event.MouseEvent evt) {
                 updateBoard(evt);
+            }
+    }
+    private class mouseClickedLabel extends MouseAdapter{
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+                JLabel temp=(JLabel) evt.getSource();
+                myPanel parent=(myPanel)temp.getParent();
+                if(!updateBoard(evt))
+                highlightAllValidDestinations(parent);
+                lastClicked=temp;
             }
     }
     @SuppressWarnings("unchecked")
@@ -192,11 +202,6 @@ public class BoardFrame extends javax.swing.JFrame {
         a8.setBackground(new java.awt.Color(255, 183, 122));
 
         blackRook1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackRook.png"))); // NOI18N
-        blackRook1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackRook1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout a8Layout = new javax.swing.GroupLayout(a8);
         a8.setLayout(a8Layout);
@@ -218,11 +223,6 @@ public class BoardFrame extends javax.swing.JFrame {
         b8.setBackground(new java.awt.Color(60, 33, 6));
 
         blackKnight1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackKnight.png"))); // NOI18N
-        blackKnight1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackKnight1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout b8Layout = new javax.swing.GroupLayout(b8);
         b8.setLayout(b8Layout);
@@ -244,11 +244,6 @@ public class BoardFrame extends javax.swing.JFrame {
         b7.setBackground(new java.awt.Color(255, 183, 122));
 
         blackPawn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout b7Layout = new javax.swing.GroupLayout(b7);
         b7.setLayout(b7Layout);
@@ -270,11 +265,6 @@ public class BoardFrame extends javax.swing.JFrame {
         a7.setBackground(new java.awt.Color(60, 33, 6));
 
         blackPawn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout a7Layout = new javax.swing.GroupLayout(a7);
         a7.setLayout(a7Layout);
@@ -348,11 +338,6 @@ public class BoardFrame extends javax.swing.JFrame {
         a2.setBackground(new java.awt.Color(255, 183, 122));
 
         whitePawn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout a2Layout = new javax.swing.GroupLayout(a2);
         a2.setLayout(a2Layout);
@@ -374,11 +359,6 @@ public class BoardFrame extends javax.swing.JFrame {
         b2.setBackground(new java.awt.Color(60, 33, 6));
 
         whitePawn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout b2Layout = new javax.swing.GroupLayout(b2);
         b2.setLayout(b2Layout);
@@ -400,11 +380,6 @@ public class BoardFrame extends javax.swing.JFrame {
         b1.setBackground(new java.awt.Color(255, 183, 122));
 
         whiteKnight1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteKnight.png"))); // NOI18N
-        whiteKnight1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteKnight1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout b1Layout = new javax.swing.GroupLayout(b1);
         b1.setLayout(b1Layout);
@@ -426,11 +401,6 @@ public class BoardFrame extends javax.swing.JFrame {
         a1.setBackground(new java.awt.Color(60, 33, 6));
 
         whiteRook1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteRook.png"))); // NOI18N
-        whiteRook1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteRook1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout a1Layout = new javax.swing.GroupLayout(a1);
         a1.setLayout(a1Layout);
@@ -504,11 +474,6 @@ public class BoardFrame extends javax.swing.JFrame {
         d8.setBackground(new java.awt.Color(60, 33, 6));
 
         blackQueen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackQueen.png"))); // NOI18N
-        blackQueen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackQueenMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout d8Layout = new javax.swing.GroupLayout(d8);
         d8.setLayout(d8Layout);
@@ -543,11 +508,6 @@ public class BoardFrame extends javax.swing.JFrame {
         c8.setBackground(new java.awt.Color(255, 183, 122));
 
         blackBishop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackBishop.png"))); // NOI18N
-        blackBishop1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackBishop1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout c8Layout = new javax.swing.GroupLayout(c8);
         c8.setLayout(c8Layout);
@@ -569,11 +529,6 @@ public class BoardFrame extends javax.swing.JFrame {
         c1.setBackground(new java.awt.Color(60, 33, 6));
 
         whiteBishop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteBishop.png"))); // NOI18N
-        whiteBishop1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteBishop1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout c1Layout = new javax.swing.GroupLayout(c1);
         c1.setLayout(c1Layout);
@@ -595,11 +550,6 @@ public class BoardFrame extends javax.swing.JFrame {
         d1.setBackground(new java.awt.Color(255, 183, 122));
 
         whiteQueen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteQueen.png"))); // NOI18N
-        whiteQueen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteQueenMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout d1Layout = new javax.swing.GroupLayout(d1);
         d1.setLayout(d1Layout);
@@ -621,11 +571,6 @@ public class BoardFrame extends javax.swing.JFrame {
         d2.setBackground(new java.awt.Color(60, 33, 6));
 
         whitePawn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn4MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout d2Layout = new javax.swing.GroupLayout(d2);
         d2.setLayout(d2Layout);
@@ -647,11 +592,6 @@ public class BoardFrame extends javax.swing.JFrame {
         c2.setBackground(new java.awt.Color(255, 183, 122));
 
         whitePawn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn3MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout c2Layout = new javax.swing.GroupLayout(c2);
         c2.setLayout(c2Layout);
@@ -738,11 +678,6 @@ public class BoardFrame extends javax.swing.JFrame {
         c7.setBackground(new java.awt.Color(60, 33, 6));
 
         blackPawn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn3MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout c7Layout = new javax.swing.GroupLayout(c7);
         c7.setLayout(c7Layout);
@@ -777,11 +712,6 @@ public class BoardFrame extends javax.swing.JFrame {
         d7.setBackground(new java.awt.Color(255, 183, 122));
 
         blackPawn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn4MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout d7Layout = new javax.swing.GroupLayout(d7);
         d7.setLayout(d7Layout);
@@ -816,11 +746,6 @@ public class BoardFrame extends javax.swing.JFrame {
         f8.setBackground(new java.awt.Color(60, 33, 6));
 
         blackBishop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackBishop.png"))); // NOI18N
-        blackBishop2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackBishop2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout f8Layout = new javax.swing.GroupLayout(f8);
         f8.setLayout(f8Layout);
@@ -855,11 +780,6 @@ public class BoardFrame extends javax.swing.JFrame {
         e8.setBackground(new java.awt.Color(255, 183, 122));
 
         blackKing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackKing.png"))); // NOI18N
-        blackKing.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackKingMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout e8Layout = new javax.swing.GroupLayout(e8);
         e8.setLayout(e8Layout);
@@ -881,11 +801,6 @@ public class BoardFrame extends javax.swing.JFrame {
         g2.setBackground(new java.awt.Color(255, 183, 122));
 
         whitePawn7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn7MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout g2Layout = new javax.swing.GroupLayout(g2);
         g2.setLayout(g2Layout);
@@ -907,11 +822,6 @@ public class BoardFrame extends javax.swing.JFrame {
         h2.setBackground(new java.awt.Color(60, 33, 6));
 
         whitePawn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn8MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout h2Layout = new javax.swing.GroupLayout(h2);
         h2.setLayout(h2Layout);
@@ -933,11 +843,6 @@ public class BoardFrame extends javax.swing.JFrame {
         h1.setBackground(new java.awt.Color(255, 183, 122));
 
         whiteRook2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteRook.png"))); // NOI18N
-        whiteRook2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteRook2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout h1Layout = new javax.swing.GroupLayout(h1);
         h1.setLayout(h1Layout);
@@ -959,11 +864,6 @@ public class BoardFrame extends javax.swing.JFrame {
         g1.setBackground(new java.awt.Color(60, 33, 6));
 
         whiteKnight2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteKnight.png"))); // NOI18N
-        whiteKnight2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteKnight2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout g1Layout = new javax.swing.GroupLayout(g1);
         g1.setLayout(g1Layout);
@@ -985,11 +885,6 @@ public class BoardFrame extends javax.swing.JFrame {
         g8.setBackground(new java.awt.Color(255, 183, 122));
 
         blackKnight2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackKnight.png"))); // NOI18N
-        blackKnight2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackKnight2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout g8Layout = new javax.swing.GroupLayout(g8);
         g8.setLayout(g8Layout);
@@ -1024,11 +919,6 @@ public class BoardFrame extends javax.swing.JFrame {
         h8.setBackground(new java.awt.Color(60, 33, 6));
 
         blackRook2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackRook.png"))); // NOI18N
-        blackRook2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackRook2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout h8Layout = new javax.swing.GroupLayout(h8);
         h8.setLayout(h8Layout);
@@ -1102,11 +992,6 @@ public class BoardFrame extends javax.swing.JFrame {
         e1.setBackground(new java.awt.Color(60, 33, 6));
 
         whiteKing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteKing.png"))); // NOI18N
-        whiteKing.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteKingMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout e1Layout = new javax.swing.GroupLayout(e1);
         e1.setLayout(e1Layout);
@@ -1128,11 +1013,6 @@ public class BoardFrame extends javax.swing.JFrame {
         f1.setBackground(new java.awt.Color(255, 183, 122));
 
         whiteBishop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhiteBishop.png"))); // NOI18N
-        whiteBishop2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whiteBishop2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout f1Layout = new javax.swing.GroupLayout(f1);
         f1.setLayout(f1Layout);
@@ -1167,11 +1047,6 @@ public class BoardFrame extends javax.swing.JFrame {
         h7.setBackground(new java.awt.Color(255, 183, 122));
 
         blackPawn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn8MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout h7Layout = new javax.swing.GroupLayout(h7);
         h7.setLayout(h7Layout);
@@ -1193,11 +1068,6 @@ public class BoardFrame extends javax.swing.JFrame {
         f2.setBackground(new java.awt.Color(60, 33, 6));
 
         whitePawn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn6MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout f2Layout = new javax.swing.GroupLayout(f2);
         f2.setLayout(f2Layout);
@@ -1219,11 +1089,6 @@ public class BoardFrame extends javax.swing.JFrame {
         e2.setBackground(new java.awt.Color(255, 183, 122));
 
         whitePawn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/WhitePawn.png"))); // NOI18N
-        whitePawn5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                whitePawn5MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout e2Layout = new javax.swing.GroupLayout(e2);
         e2.setLayout(e2Layout);
@@ -1284,11 +1149,6 @@ public class BoardFrame extends javax.swing.JFrame {
         g7.setBackground(new java.awt.Color(60, 33, 6));
 
         blackPawn7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn7MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout g7Layout = new javax.swing.GroupLayout(g7);
         g7.setLayout(g7Layout);
@@ -1362,11 +1222,6 @@ public class BoardFrame extends javax.swing.JFrame {
         e7.setBackground(new java.awt.Color(60, 33, 6));
 
         blackPawn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn5MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout e7Layout = new javax.swing.GroupLayout(e7);
         e7.setLayout(e7Layout);
@@ -1401,11 +1256,6 @@ public class BoardFrame extends javax.swing.JFrame {
         f7.setBackground(new java.awt.Color(255, 183, 122));
 
         blackPawn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChessGui/BlackPawn.png"))); // NOI18N
-        blackPawn6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                blackPawn6MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout f7Layout = new javax.swing.GroupLayout(f7);
         f7.setLayout(f7Layout);
@@ -1747,294 +1597,6 @@ public class BoardFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void whiteRook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteRook1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-        if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteRook1MouseClicked
-
-    private void whiteKnight1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteKnight1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteKnight1MouseClicked
-
-    private void whiteBishop1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteBishop1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-        if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteBishop1MouseClicked
-
-    private void whiteQueenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteQueenMouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteQueenMouseClicked
-
-    private void whiteKingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteKingMouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteKingMouseClicked
-
-    private void whiteBishop2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteBishop2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteBishop2MouseClicked
-
-    private void whiteKnight2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteKnight2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-        if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteKnight2MouseClicked
-
-    private void whiteRook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whiteRook2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whiteRook2MouseClicked
-
-    private void whitePawn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn1MouseClicked
-
-    private void whitePawn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn2MouseClicked
-
-    private void whitePawn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn3MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-        if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn3MouseClicked
-
-    private void whitePawn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn4MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-        if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn4MouseClicked
-
-    private void whitePawn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn5MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn5MouseClicked
-
-    private void whitePawn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn6MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn6MouseClicked
-
-    private void whitePawn7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn7MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn7MouseClicked
-
-    private void whitePawn8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whitePawn8MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_whitePawn8MouseClicked
-
-    private void blackPawn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn1MouseClicked
-
-    private void blackPawn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn2MouseClicked
-
-    private void blackPawn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn3MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn3MouseClicked
-
-    private void blackPawn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn4MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn4MouseClicked
-
-    private void blackPawn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn5MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-        if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn5MouseClicked
-
-    private void blackPawn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn6MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn6MouseClicked
-
-    private void blackPawn7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn7MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn7MouseClicked
-
-    private void blackPawn8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackPawn8MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackPawn8MouseClicked
-
-    private void blackRook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackRook1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackRook1MouseClicked
-
-    private void blackKnight1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackKnight1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackKnight1MouseClicked
-
-    private void blackBishop1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackBishop1MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-        
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackBishop1MouseClicked
-
-    private void blackQueenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackQueenMouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackQueenMouseClicked
-
-    private void blackKingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackKingMouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackKingMouseClicked
-
-    private void blackBishop2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackBishop2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-    
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackBishop2MouseClicked
-
-    private void blackKnight2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackKnight2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackKnight2MouseClicked
-
-    private void blackRook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackRook2MouseClicked
-        JLabel temp=(JLabel) evt.getSource();
-       
-        myPanel parent=(myPanel)temp.getParent();
-         if(!updateBoard(evt))
-        highlightAllValidDestinations(parent);
-        lastClicked=temp;
-    }//GEN-LAST:event_blackRook2MouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!gameHistory.empty()){
         game.restoreToSavepoint(gameHistory.pop());
@@ -2220,8 +1782,6 @@ public class BoardFrame extends javax.swing.JFrame {
             }
             
             if(game.playGame(parent.getName(), dest.getName())){
-                
-                
                 redrawBoard();
                 if(game.getCurrentMoveStatus()==MoveStatus.PROMOTION){
                     String choice;
