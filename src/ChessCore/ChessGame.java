@@ -15,7 +15,7 @@ public class ChessGame  {
     private Player currentPlayer;
     private GameStatus status;
     private Move currentMove;
-    
+    private boolean tempMoveSource;
     
     public ChessGame(){
         board=new Board();
@@ -34,21 +34,18 @@ public class ChessGame  {
         return isValidMove(new Move(changeNameToSquare(source),changeNameToSquare(dest)));
     }
     public boolean isValidMove(Move move){
-        
-        
-        
-        if(checkMovePutsItselfInCheck(move))
-            return false;
-        
-        return isValidMoveWithoutCheck(move);
-    }
-    public boolean isValidMoveWithoutCheck(Move move){
+        tempMoveSource=true; 
         if((currentPlayer==player1 && move.getSource().getPiece().getColor()!=PieceColor.WHITE) || (currentPlayer==player2 &&move.getSource().getPiece().getColor()!=PieceColor.BLACK))
             return false;
-        return isValidMoveWithoutTurn( move);
-    }
+        if(checkMovePutsItselfInCheck(move))
+            return false;
+       
+        return isValidMoveWithoutTurn(move);
+    } 
     private boolean isValidMoveWithoutTurn(Move move){
-        
+        if(move.getDestination()==null)
+            return false;
+
         if (move.getSource().getPiece() instanceof Pawn)
             ((Pawn)move.getSource().getPiece()).setLastMove(lastMove);
         
@@ -85,6 +82,7 @@ public class ChessGame  {
     }
     //gets all valid moves from a target square
     public ArrayList<Move> getAllValidMovesFromSquare(Square source){
+        tempMoveSource=true;
         ArrayList<Move> moves=new ArrayList<>();
          if (source == null ||source.isEmpty()) {
             return moves;
@@ -93,8 +91,7 @@ public class ChessGame  {
             for (int j= 0; j < 8; j++) {
                 Square temp = board.getSquare(i,j);
                 Move move=new Move(source,temp);
-                if (isValidMoveWithoutCheck(move)) {
-                    if(!checkMovePutsItselfInCheck(move))
+                if (isValidMove(move)) {
                     moves.add(move);
                 }   
             }
@@ -102,6 +99,7 @@ public class ChessGame  {
         return moves;
     }
     public ArrayList<Move> getAllValidMovesFromSquareInternal(Square source){
+         tempMoveSource=false;
         ArrayList<Move> moves=new ArrayList<>();
          if (source == null ||source.isEmpty()) {
             return moves;
@@ -171,10 +169,8 @@ public class ChessGame  {
             if(capturedPiece!=null){
                 System.out.println("Captured "+capturedPiece);
                 currentPlayer.decreaseNumberOfPieces(capturedPiece);
-                
-                
-            }
-                
+   
+            }    
             updateGameStatus();
             switchPlayers();
             return true;    
@@ -227,45 +223,29 @@ public class ChessGame  {
     }
     }
 
-    private GameStatus updateStatusForCheck() {
+    private GameStatus updateStatusForCheck(PieceColor color) {
         Square s ;
-        Square blackKingSquare =board.getKingPosition(PieceColor.BLACK);
-        Square whiteKingSquare =board.getKingPosition(PieceColor.WHITE);
+        Square kingSquare =board.getKingPosition(color);
+        PieceColor checker=(color==PieceColor.WHITE)?PieceColor.BLACK:PieceColor.WHITE;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if(board.getSquare(i, j).isEmpty())
                     continue;
-                if(board.getSquare(i, j).getPiece().getColor()!=PieceColor.WHITE)
+                if(board.getSquare(i, j).getPiece().getColor()!=checker)
                     continue;
                  s = board.getSquare(i, j);
-                Move move = new Move(s, blackKingSquare);
+                Move move = new Move(s, kingSquare);
                
                 if (isValidMoveWithoutTurn(move)) {
-                    
-                    return GameStatus.BLACKINCHECK;
+                    if(color==PieceColor.WHITE)
+                        return GameStatus.WHITEINCHECK;
+                                else return GameStatus.BLACKINCHECK;
                    
                 }
 
             }
         }
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if(board.getSquare(i, j).isEmpty())
-                    continue;
-                if(board.getSquare(i, j).getPiece().getColor()!=PieceColor.BLACK)
-                    continue;
-                 s = board.getSquare(i, j); 
-                Move move = new Move(s, whiteKingSquare);
-                if (isValidMoveWithoutTurn(move))
-                {
-                    
-                    return GameStatus.WHITEINCHECK;
-                     
-                }
 
-            }
-        }
-       
         return  GameStatus.ACTIVE;
     }
     private boolean isCheckmate(){
@@ -320,7 +300,7 @@ public class ChessGame  {
                 ArrayList<Move> moves=getAllValidMovesFromSquareInternal(board.getSquare(i, j));
                 
                 for(Move x:moves){   
-                     if(!checkMovePutsInCheckForStalemate(x))
+                     if(!checkMovePutsItselfInCheck(x))
                         return false;                        
                 }
              
@@ -331,18 +311,7 @@ public class ChessGame  {
         return true;
         
     }
-    private boolean checkMovePutsInCheckForStalemate(Move move){
-        GameStatus originalStatus=status;
-        Piece p=tempMove(move);
-        if(status==GameStatus.ACTIVE)
-            {
-                undoMove(move,p,originalStatus);
-                return false;
-            }
-            undoMove(move,p,originalStatus);    
-            return true;
-    }
-    
+
     private Square changeNameToSquare(String name) throws NumberFormatException{
         return board.getSquare(Integer.parseInt(name.substring(1))-1,(int)(name.toLowerCase().charAt(0)-'a'));
     }
@@ -370,10 +339,11 @@ public class ChessGame  {
     }
 
     private void updateGameStatus(){
-        if( updateStatusForCheck()!=GameStatus.ACTIVE){
-             status= updateStatusForCheck();
+        PieceColor color=(currentPlayer.getColor()==PieceColor.WHITE)?PieceColor.BLACK:PieceColor.WHITE;
+        if( updateStatusForCheck(color)!=GameStatus.ACTIVE){
+             status= updateStatusForCheck(color);
             if(isCheckmate()){
-                status=(updateStatusForCheck()==GameStatus.WHITEINCHECK)?GameStatus.BLACK_WIN:GameStatus.WHITE_WIN;
+                status=(updateStatusForCheck(color)==GameStatus.WHITEINCHECK)?GameStatus.BLACK_WIN:GameStatus.WHITE_WIN;
                 if(status==GameStatus.WHITE_WIN)
                 System.out.println("White Won");
                 else System.out.println("Black Won");
@@ -403,11 +373,15 @@ public class ChessGame  {
         move.getDestination().setPiece(piece);
         this.status=status;
     }
+
     private Piece tempMove(Move move){
+        PieceColor color=(currentPlayer.getColor()==PieceColor.WHITE)?PieceColor.BLACK:PieceColor.WHITE;
         Piece capturedPiece =move.getDestination().getPiece();
         move.getDestination().setPiece(move.getSource().getPiece());
         move.getSource().setPiece(null);
-        status=updateStatusForCheck();
+        if(tempMoveSource)
+        status=updateStatusForCheck(currentPlayer.getColor());
+        else status=updateStatusForCheck(color); 
         return capturedPiece;
     }
     public Memento savepoint(){
