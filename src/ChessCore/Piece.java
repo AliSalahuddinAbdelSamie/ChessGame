@@ -7,7 +7,7 @@ package ChessCore;
 public abstract class Piece {
     private PieceColor color;
     private boolean hasMoved;
-    String name;
+    private String name;
     public Piece(PieceColor color,String name){
         this.color=color;
         hasMoved=false;

@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,14 +45,19 @@ public class BoardFrame extends javax.swing.JFrame {
     private JLabel lastClicked;
     private Stack<Memento> gameHistory;
     private HashMap<String,myLabel> labelMap;
-    
+    private ArrayList<myLabel> promotedPieces;
+    private final Icon whitePawnIcon;
+    private final Icon blackPawnIcon;
     public BoardFrame() {
         initComponents();
+        whitePawnIcon=whitePawn1.getIcon();
+        blackPawnIcon=blackPawn1.getIcon();
         gameHistory=new Stack<>();
         lastClicked=null;
         game=new ChessGame();
         map=new HashMap<>();
         labelMap=new HashMap<>();
+        promotedPieces=new ArrayList<>();
         originalColors=new ArrayList<>();
         panelArray = new JPanel[]   {a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, b3, b4, b5, b6, b7, b8,
                                     c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, d6, d7, d8,
@@ -1602,6 +1608,15 @@ public class BoardFrame extends javax.swing.JFrame {
         game.restoreToSavepoint(gameHistory.pop());
         redrawBoard();
         highlightKingCheck();
+        for(myLabel i:promotedPieces){
+            if(i.getMovesSincePromotion()==0){
+                i.setMovesSincePromotion(-1);
+               if(i.getName().charAt(0)=='W')
+                   i.setIcon(whitePawnIcon);
+               else i.setIcon(blackPawnIcon);
+            }
+            else i.setMovesSincePromotion(i.getMovesSincePromotion()-1);
+        }
         //flipBoard();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1794,7 +1809,10 @@ public class BoardFrame extends javax.swing.JFrame {
                     PieceColor color=game.promotionHandling(choice.charAt(0));
                     JLabel label=(JLabel)dest.getComponent(0);
                     changeLabel(label, color,choice.charAt(0));
+                    promotedPieces.add((myLabel)label);
                 }
+            for(myLabel i:promotedPieces)
+                i.setMovesSincePromotion(i.getMovesSincePromotion()+1);
             parent.repaint();
             removeHighlights();
             checkGameEnd();
