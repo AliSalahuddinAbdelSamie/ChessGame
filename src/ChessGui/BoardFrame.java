@@ -2039,8 +2039,8 @@ public class BoardFrame extends javax.swing.JFrame {
         if(!gameHistory.empty()){
         game.restoreToSavepoint(gameHistory.pop());
         redrawBoard();
-        removeKingHighlight();
-        flipBoard();
+        highlightKingCheck();
+        //flipBoard();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
@@ -2211,7 +2211,7 @@ public class BoardFrame extends javax.swing.JFrame {
                 JLabel label=(JLabel)evt.getSource();
                 if(label.getName().equals("WK")||label.getName().equals("BK"))
                 return false;
-                dest=(myPanel)label.getParent();
+                    dest=(myPanel)label.getParent();
             }
             if(parent==null)
                 return false;
@@ -2238,7 +2238,7 @@ public class BoardFrame extends javax.swing.JFrame {
             parent.repaint();
             removeHighlights();
             checkGameEnd();
-            flipBoard();
+           // flipBoard();
             highlightKingCheck();
             return true;
             }

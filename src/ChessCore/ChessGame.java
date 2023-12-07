@@ -15,9 +15,7 @@ public class ChessGame  {
     private Player currentPlayer;
     private GameStatus status;
     private Move currentMove;
-    private Square capturedPieceSquare;
-    private Square rookAvailableToCastleSquare;
-    private Square rookDestinationAfterCastle; 
+    
     
     public ChessGame(){
         board=new Board();
@@ -26,9 +24,7 @@ public class ChessGame  {
         player2=new Player(PieceColor.BLACK);
         currentPlayer=player1;
         status=GameStatus.ACTIVE;
-        capturedPieceSquare=null;
-        rookAvailableToCastleSquare=null;
-        rookDestinationAfterCastle=null;
+        
     }
 
     public Board getBoard() {
@@ -150,7 +146,7 @@ public class ChessGame  {
                   
         Piece capturedPiece=d.getPiece();
         currentMove=new Move(s,d);
-        capturedPieceSquare=d;
+       
         if(isValidMove(currentMove))
         {     
             currentMove.getSource().getPiece().setHasMoved(true);
@@ -159,7 +155,7 @@ public class ChessGame  {
             s.setPiece(null);
             if(currentMove.getStatus()==MoveStatus.ENPASSENT){
                 System.out.println("Enpassant");
-                capturedPieceSquare=board.getSquare(currentMove.getSource().getRowPos(), currentMove.getDestination().getColPos());
+                
                 capturedPiece=board.getSquare(currentMove.getSource().getRowPos(), currentMove.getDestination().getColPos()).getPiece();        
                 board.getSquare(currentMove.getSource().getRowPos(), currentMove.getDestination().getColPos()).setPiece(null);
             }
@@ -168,9 +164,9 @@ public class ChessGame  {
                 int direction=getDirectionForCastling(currentMove);
                 System.out.println("Castle");
                 forRook=board.getRookIfAvailableForCastling(currentMove.getDestination().getPiece().getColor(), direction);
-                rookAvailableToCastleSquare=forRook;
+                
                 forRook.getPiece().setHasMoved(true);
-                rookDestinationAfterCastle=board.getSquare(currentMove.getDestination().getRowPos(),currentMove.getDestination().getColPos()+(direction*-1));
+                
                 board.getSquare(currentMove.getDestination().getRowPos(),currentMove.getDestination().getColPos()+(direction*-1)).setPiece(forRook.getPiece());
                 forRook.setPiece(null);
             }
@@ -202,18 +198,11 @@ public class ChessGame  {
     public GameStatus getStatus(){
         return status;
     }
-    public Square getCapturedPieceSquare(){
-        return capturedPieceSquare;
-    }
+    
     public MoveStatus getCurrentMoveStatus(){
         return currentMove.getStatus();
     }
-    public Square getRookPositionBeforeCastle(){
-        return rookAvailableToCastleSquare;
-    }
-    public Square getRookPositionAfterCastle(){
-        return rookDestinationAfterCastle;
-    }
+    
     //handles promotion
     public PieceColor promotionHandling(char promotion){
         Player temp=(currentPlayer==player1)?player2:player1;
@@ -428,7 +417,7 @@ public class ChessGame  {
         return capturedPiece;
     }
     public Memento savepoint(){
-        return new Memento(board,lastMove,currentPlayer,status,currentMove,capturedPieceSquare,rookAvailableToCastleSquare,rookDestinationAfterCastle);
+        return new Memento(board,lastMove,currentPlayer,status,currentMove);
     }
     public void restoreToSavepoint(Memento memento){
         this.board=memento.getBoard();
@@ -436,9 +425,7 @@ public class ChessGame  {
         this.currentPlayer=memento.getCurrentPlayer();
         this.status=memento.getStatus();
         this.currentMove=memento.getCurrentMove();
-        this.capturedPieceSquare=memento.getCapturedPieceSquare();
-        this.rookAvailableToCastleSquare=memento.getRookAvailableToCastleSquare();
-        this.rookDestinationAfterCastle=memento.getRookDestinationAfterCastle();
+        
     }
     
     public static class Memento{
@@ -447,19 +434,15 @@ public class ChessGame  {
         private final Player currentPlayer;
         private final GameStatus status;
         private final Move currentMove;
-        private final Square capturedPieceSquare;
-        private final Square rookAvailableToCastleSquare;
-        private final Square rookDestinationAfterCastle;
+        
 
-        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove, Square capturedPieceSquare, Square rookAvailableToCastleSquare, Square rookDestinationAfterCastle) {
+        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove) {
             this.board = new Board(board);
             this.lastMove = lastMove;
             this.currentPlayer = currentPlayer;
             this.status = status;
             this.currentMove = currentMove;
-            this.capturedPieceSquare = capturedPieceSquare;
-            this.rookAvailableToCastleSquare = rookAvailableToCastleSquare;
-            this.rookDestinationAfterCastle = rookDestinationAfterCastle;
+            
         }
 
         private Board getBoard() {
@@ -482,17 +465,7 @@ public class ChessGame  {
             return currentMove;
         }
 
-        private Square getCapturedPieceSquare() {
-            return capturedPieceSquare;
-        }
-
-        private Square getRookAvailableToCastleSquare() {
-            return rookAvailableToCastleSquare;
-        }
-
-        private Square getRookDestinationAfterCastle() {
-            return rookDestinationAfterCastle;
-        }
+        
         
         
     }
