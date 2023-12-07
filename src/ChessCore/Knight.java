@@ -29,7 +29,7 @@ public class Knight extends Piece {
         return false;
     }
     @Override
-    public Piece copy(){
+    public Piece Clone(){
         Knight copy=new Knight(this.getColor(),this.getName());
         copy.setHasMoved(this.getHasMoved());
         return copy;

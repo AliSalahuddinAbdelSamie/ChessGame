@@ -39,7 +39,7 @@ public class King extends Piece {
         
     }
     @Override
-    public Piece copy(){
+    public Piece Clone(){
         King copy=new King(this.getColor(),this.getName());
         copy.setHasMoved(this.getHasMoved());
         return copy;

@@ -405,7 +405,7 @@ public class ChessGame  {
         
 
         private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove) {
-            this.board = new Board(board);
+            this.board = board.Clone();
             this.lastMove = lastMove;
             this.currentPlayer = currentPlayer;
             this.status = status;

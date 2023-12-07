@@ -4,14 +4,14 @@
  */
 package ChessCore;
 
-public class Board {
+public class Board implements Prototype {
     private Square[][] squares;
     public Board(){
         this.squares=new Square[8][8];
         setupBoard();
     }
     //copy constructor
-    public Board(Board board){
+    private Board(Board board){
         this.squares=new Square[8][8]; 
         for(int i=0;i<8;i++)
             for(int j=0;j<8;j++)
@@ -19,8 +19,12 @@ public class Board {
                 if(board.getSquare(i, j).getPiece()==null)
                     this.squares[i][j]=new Square(i,j,null);
                 else 
-                this.squares[i][j]=new Square(i,j,board.getSquare(i, j).getPiece().copy());
+                this.squares[i][j]=new Square(i,j,board.getSquare(i, j).getPiece().Clone());
             }
+    }
+    @Override
+    public Board Clone(){
+        return new Board(this);
     }
     public void setupBoard(){
         

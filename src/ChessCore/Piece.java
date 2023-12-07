@@ -4,7 +4,7 @@
  */
 package ChessCore;
 
-public abstract class Piece {
+public abstract class Piece implements Prototype {
     private PieceColor color;
     private boolean hasMoved;
     private String name;
@@ -32,5 +32,6 @@ public abstract class Piece {
         return name;
     }
       
-    public abstract Piece copy();
+    @Override
+    public abstract Piece Clone();
 }

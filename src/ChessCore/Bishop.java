@@ -8,7 +8,10 @@ public class Bishop extends Piece {
     public Bishop(PieceColor color,String name){
         super(color,name);   
     }
-
+    private Bishop(Bishop bishop){
+        super(bishop.getColor(),bishop.getName());
+        this.setHasMoved(bishop.getHasMoved());
+    }
     @Override
     public String toString() {
         return "Bishop";
@@ -30,9 +33,7 @@ public class Bishop extends Piece {
     }
     
     @Override
-    public Piece copy(){
-        Bishop copy=new Bishop(this.getColor(),this.getName());
-        copy.setHasMoved(this.getHasMoved());
-        return copy;
+    public Piece Clone(){
+        return new Bishop(this);
     }
 }

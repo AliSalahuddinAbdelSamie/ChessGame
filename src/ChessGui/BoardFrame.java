@@ -9,18 +9,11 @@ import ChessCore.Board;
 import ChessCore.ChessGame;
 import ChessCore.ChessGame.Memento;
 import ChessCore.GameStatus;
-import ChessCore.King;
-import ChessCore.Knight;
 import ChessCore.Move;
 import ChessCore.MoveStatus;
-import ChessCore.Pawn;
 import ChessCore.PieceColor;
-import ChessCore.Queen;
-import ChessCore.Rook;
 import ChessCore.Square;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -1608,15 +1601,19 @@ public class BoardFrame extends javax.swing.JFrame {
         game.restoreToSavepoint(gameHistory.pop());
         redrawBoard();
         highlightKingCheck();
+        myLabel temp=null;
         for(myLabel i:promotedPieces){
             if(i.getMovesSincePromotion()==0){
                 i.setMovesSincePromotion(-1);
                if(i.getName().charAt(0)=='W')
                    i.setIcon(whitePawnIcon);
                else i.setIcon(blackPawnIcon);
+               temp=i;
             }
             else i.setMovesSincePromotion(i.getMovesSincePromotion()-1);
         }
+        if(temp!=null)
+            promotedPieces.remove(temp);
         //flipBoard();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

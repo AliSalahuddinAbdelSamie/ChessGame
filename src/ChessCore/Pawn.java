@@ -69,7 +69,7 @@ public class Pawn extends Piece {
         return false;
     }
     @Override
-    public Piece copy(){
+    public Piece Clone(){
         Pawn copy=new Pawn(this.getColor(),this.getName());
         copy.setHasMoved(this.getHasMoved());
         copy.setLastMove(this.lastMove);
