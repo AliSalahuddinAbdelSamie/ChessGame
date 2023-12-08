@@ -5,13 +5,12 @@
 package ChessCore;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class ChessGame  {
     private Board board;
     private Move lastMove;
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private Player currentPlayer;
     private GameStatus status;
     private Move currentMove;
@@ -145,7 +144,7 @@ public class ChessGame  {
         Piece capturedPiece=d.getPiece();
         currentMove=new Move(s,d);
         if(isValidMove(currentMove))
-        {     
+        {   
             currentMove.getSource().getPiece().setHasMoved(true);
             lastMove=currentMove; 
             d.setPiece(s.getPiece());
@@ -168,9 +167,13 @@ public class ChessGame  {
                 currentMove.setStatus(MoveStatus.PROMOTION);
             if(capturedPiece!=null){
                 System.out.println("Captured "+capturedPiece);
-                currentPlayer.decreaseNumberOfPieces(capturedPiece);
+                if(currentPlayer==player1)
+                player2.decreaseNumberOfPieces(capturedPiece);
+                else player1.decreaseNumberOfPieces(capturedPiece);
    
-            }    
+            }  
+            System.out.println(player1.getPawns());
+            System.out.println(player2.getPawns());
             updateGameStatus();
             switchPlayers();
             return true;    
@@ -179,7 +182,7 @@ public class ChessGame  {
             System.out.println("Invalid move");
             return false;
         }
-        
+         
        
         
     }
@@ -385,7 +388,7 @@ public class ChessGame  {
         return capturedPiece;
     }
     public Memento savepoint(){
-        return new Memento(board,lastMove,currentPlayer,status,currentMove,player1,player2);
+        return new Memento(board,lastMove,currentPlayer,status,currentMove);
     }
     public void restoreToSavepoint(Memento memento){
         this.board=memento.getBoard();
@@ -393,21 +396,18 @@ public class ChessGame  {
         this.currentPlayer=memento.getCurrentPlayer();
         this.status=memento.getStatus();
         this.currentMove=memento.getCurrentMove();
-        this.player1=memento.getPlayer1();
-        this.player2=memento.getPlayer2();
+        
     }
     
     public static class Memento{
         private final Board board;
         private final Move lastMove;
-        private final Player player1;
-        private final Player player2;
         private final Player currentPlayer;
         private final GameStatus status;
         private final Move currentMove;
         
 
-        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove,Player player1,Player player2) {
+        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove) {
             this.board = board.clone();
             if(lastMove==null)
                 this.lastMove = null;
@@ -416,9 +416,8 @@ public class ChessGame  {
             this.status = status;
             if(currentMove==null)
                 this.currentMove = null;
-            else this.currentMove = currentMove.clone();
-            this.player1=player1.clone();
-            this.player2=player2.clone();
+            else this.currentMove = currentMove;
+        
         }
 
         private Board getBoard() {
@@ -441,13 +440,7 @@ public class ChessGame  {
             return currentMove;
         }
 
-        private Player getPlayer1() {
-            return player1;
-        }
-
-        private Player getPlayer2() {
-            return player2;
-        }
+        
         
         
         
