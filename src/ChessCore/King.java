@@ -1,14 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 public class King extends Piece {
-    public King(PieceColor color,String name){
-        super(color,name);
+    private final PieceType type=PieceType.KING;
+    
+    
+    public King(PieceColor color,String name,PieceType type){
+        super(color,name,type);
     }
-
+    private King(King king){
+        super(king.getColor(),king.getName(),king.getType());
+        this.setHasMoved(king.getHasMoved());
+    }
     @Override
     public String toString() {
         return "King";
@@ -38,10 +41,13 @@ public class King extends Piece {
         return false;
         
     }
+
+    public PieceType getType() {
+        return type;
+    }
+    
     @Override
     public Piece clone(){
-        King copy=new King(this.getColor(),this.getName());
-        copy.setHasMoved(this.getHasMoved());
-        return copy;
+        return new King(this);
     }
 }

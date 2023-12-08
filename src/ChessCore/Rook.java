@@ -1,14 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 public class Rook extends Piece {
-    public Rook(PieceColor color,String name){
-        super(color,name);
+    public Rook(PieceColor color,String name,PieceType type){
+        super(color,name,type);
     }
-
+    private Rook(Rook rook){
+        super(rook.getColor(),rook.getName(),rook.getType());
+        this.setHasMoved(rook.getHasMoved());
+    }
     @Override
     public String toString() {
         return "Rook";
@@ -31,9 +31,7 @@ public class Rook extends Piece {
     }
     @Override
     public Piece clone(){
-        Rook copy=new Rook(this.getColor(),this.getName());
-        copy.setHasMoved(this.getHasMoved());
-        return copy;
+        return new Rook(this);
     }
     
 }

@@ -1,17 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 public abstract class Piece implements Prototype {
     private PieceColor color;
     private boolean hasMoved;
     private String name;
-    public Piece(PieceColor color,String name){
+    private final PieceType type;
+    public Piece(PieceColor color,String name,PieceType type){
         this.color=color;
         hasMoved=false;
         this.name=name;
+        this.type=type;
     }
     
     public boolean getHasMoved() {
@@ -30,6 +29,10 @@ public abstract class Piece implements Prototype {
 
     public String getName() {
         return name;
+    }
+
+    public PieceType getType() {
+        return type;
     }
       
     @Override

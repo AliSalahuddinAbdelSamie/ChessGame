@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 import java.util.ArrayList;
@@ -172,8 +169,7 @@ public class ChessGame  {
                 else player1.decreaseNumberOfPieces(capturedPiece);
    
             }  
-            System.out.println(player1.getPawns());
-            System.out.println(player2.getPawns());
+            
             updateGameStatus();
             switchPlayers();
             return true;    
@@ -200,24 +196,25 @@ public class ChessGame  {
     public PieceColor promotionHandling(char promotion){
         Player temp=(currentPlayer==player1)?player2:player1;
         Square d=currentMove.getDestination();
+        PieceFactory factory=new PieceFactory();
         switch (promotion){
                     case 'K': 
-                    d.setPiece(new Knight(d.getPiece().getColor(),d.getPiece().getName()));
+                    d.setPiece(factory.create(d.getPiece().getColor(),d.getPiece().getName(),PieceType.KNIGHT));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
                 case 'B':
-                    d.setPiece(new Bishop(d.getPiece().getColor(),d.getPiece().getName()));
+                    d.setPiece(factory.create(d.getPiece().getColor(),d.getPiece().getName(),PieceType.BISHOP));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
                 case 'R':
-                    d.setPiece(new Rook(d.getPiece().getColor(),d.getPiece().getName()));
+                    d.setPiece(factory.create(d.getPiece().getColor(),d.getPiece().getName(),PieceType.ROOK));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();
                 case 'Q':
-                    d.setPiece(new Queen(d.getPiece().getColor(),d.getPiece().getName()));
+                    d.setPiece(factory.create(d.getPiece().getColor(),d.getPiece().getName(),PieceType.QUEEN));
                     temp.setNumbersForPromotion(d.getPiece());
                     updateGameStatus();
                     return d.getPiece().getColor();

@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 public class Bishop extends Piece {
-    public Bishop(PieceColor color,String name){
-        super(color,name);   
+   
+    public Bishop(PieceColor color,String name,PieceType type){
+        super(color,name,type);   
     }
     private Bishop(Bishop bishop){
-        super(bishop.getColor(),bishop.getName());
+        super(bishop.getColor(),bishop.getName(),bishop.getType());
         this.setHasMoved(bishop.getHasMoved());
     }
     @Override
@@ -31,9 +29,11 @@ public class Bishop extends Piece {
         }
         return false;
     }
-    
+
+ 
     @Override
-    public Piece clone(){
+    public Piece clone() {
         return new Bishop(this);
     }
+  
 }

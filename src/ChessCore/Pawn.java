@@ -1,16 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 public class Pawn extends Piece {
     private Move lastMove;
-    public Pawn(PieceColor color,String name){
-        super(color,name);  
+    private final PieceType type=PieceType.PAWN;
+    public Pawn(PieceColor color,String name,PieceType type){
+        super(color,name,type);  
         lastMove=null;   
     }
-
+    private Pawn(Pawn pawn){
+        super(pawn.getColor(),pawn.getName(),pawn.getType());
+        this.setHasMoved(pawn.getHasMoved());
+        this.setLastMove(pawn.lastMove);
+        
+    }
     public void setLastMove(Move lastMove) {
         this.lastMove = lastMove;
     }
@@ -69,11 +72,13 @@ public class Pawn extends Piece {
         return false;
     }
     @Override
+    
     public Piece clone(){
-        Pawn copy=new Pawn(this.getColor(),this.getName());
-        copy.setHasMoved(this.getHasMoved());
-        copy.setLastMove(this.lastMove);
-        return copy;
+        return new Pawn(this);
+    }
+
+    public PieceType getType() {
+        return type;
     }
 
     }

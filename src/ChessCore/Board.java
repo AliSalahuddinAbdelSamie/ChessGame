@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
 public class Board implements Prototype {
@@ -27,28 +24,29 @@ public class Board implements Prototype {
         return new Board(this);
     }
     public void setupBoard(){
-        
-        squares[0][0]=new Square(0,0,new Rook(PieceColor.WHITE,"WR1"));
-        squares[0][1]=new Square(0,1,new Knight(PieceColor.WHITE,"WK1"));
-        squares[0][2]=new Square(0,2,new Bishop(PieceColor.WHITE,"WB1"));
-        squares[0][3]=new Square(0,3,new Queen(PieceColor.WHITE,"WQ"));
-        squares[0][4]=new Square(0,4,new King(PieceColor.WHITE,"WK"));
-        squares[0][5]=new Square(0,5,new Bishop(PieceColor.WHITE,"WB2"));
-        squares[0][6]=new Square(0,6,new Knight(PieceColor.WHITE,"WK2"));
-        squares[0][7]=new Square(0,7,new Rook(PieceColor.WHITE,"WR2"));
+        PieceFactory factory=new PieceFactory();
+                
+        squares[0][0]=new Square(0,0,factory.create(PieceColor.WHITE, "WR1", PieceType.ROOK));
+        squares[0][1]=new Square(0,1,factory.create(PieceColor.WHITE, "WK1", PieceType.KNIGHT));
+        squares[0][2]=new Square(0,2,factory.create(PieceColor.WHITE, "WB1", PieceType.BISHOP));
+        squares[0][3]=new Square(0,3,factory.create(PieceColor.WHITE, "WQ", PieceType.QUEEN));
+        squares[0][4]=new Square(0,4,factory.create(PieceColor.WHITE, "WK", PieceType.KING));
+        squares[0][5]=new Square(0,5,factory.create(PieceColor.WHITE, "WB2", PieceType.BISHOP));
+        squares[0][6]=new Square(0,6,factory.create(PieceColor.WHITE, "WK2", PieceType.KNIGHT));
+        squares[0][7]=new Square(0,7,factory.create(PieceColor.WHITE, "WR2", PieceType.ROOK));
         for(int k=0;k<8;k++){
-            squares[1][k]=new Square(1,k,new Pawn(PieceColor.WHITE,"WP"+(k+1)));
-            squares[6][k]=new Square(6,k,new Pawn(PieceColor.BLACK,"BP"+(k+1)));
+            squares[1][k]=new Square(1,k,factory.create(PieceColor.WHITE, "WP"+(k+1), PieceType.PAWN));
+            squares[6][k]=new Square(6,k,factory.create(PieceColor.BLACK, "BP"+(k+1), PieceType.PAWN));
         }
         
-        squares[7][0]=new Square(7,0,new Rook(PieceColor.BLACK,"BR1"));
-        squares[7][1]=new Square(7,1,new Knight(PieceColor.BLACK,"BK1"));
-        squares[7][2]=new Square(7,2,new Bishop(PieceColor.BLACK,"BB1"));
-        squares[7][3]=new Square(7,3,new Queen(PieceColor.BLACK,"BQ"));
-        squares[7][4]=new Square(7,4,new King(PieceColor.BLACK,"BK"));
-        squares[7][5]=new Square(7,5,new Bishop(PieceColor.BLACK,"BB2"));
-        squares[7][6]=new Square(7,6,new Knight(PieceColor.BLACK,"BK2"));
-        squares[7][7]=new Square(7,7,new Rook(PieceColor.BLACK,"BR2"));
+        squares[7][0]=new Square(7,0,factory.create(PieceColor.BLACK, "BR1", PieceType.ROOK));
+        squares[7][1]=new Square(7,1,factory.create(PieceColor.BLACK, "BK1", PieceType.KNIGHT));
+        squares[7][2]=new Square(7,2,factory.create(PieceColor.BLACK, "BB1", PieceType.BISHOP));
+        squares[7][3]=new Square(7,3,factory.create(PieceColor.BLACK, "BQ", PieceType.QUEEN));
+        squares[7][4]=new Square(7,4,factory.create(PieceColor.BLACK, "BK", PieceType.KING));
+        squares[7][5]=new Square(7,5,factory.create(PieceColor.BLACK, "BB2", PieceType.BISHOP));
+        squares[7][6]=new Square(7,6,factory.create(PieceColor.BLACK, "BK2", PieceType.KNIGHT));
+        squares[7][7]=new Square(7,7,factory.create(PieceColor.BLACK, "BR2", PieceType.ROOK));
         
             
         

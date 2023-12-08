@@ -1,19 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ChessCore;
 
-/**
- *
- * @author Aly
- */
-public class Queen extends Piece {
-    public Queen(PieceColor color,String name)
-    {
-        super(color,name);
-    }
 
+public class Queen extends Piece {
+     
+    public Queen(PieceColor color,String name,PieceType type)
+    {
+        super(color,name,type);
+    }
+    private Queen(Queen queen){
+        super(queen.getColor(),queen.getName(),queen.getType());
+        this.setHasMoved(queen.getHasMoved());
+    }
     @Override
     public String toString() {
         return "Queen";
@@ -22,12 +20,10 @@ public class Queen extends Piece {
 
     @Override
     public boolean isValidMove(Move move) {
-        return new Rook(super.getColor(),"temp").isValidMove(move)|| new Bishop(super.getColor(),"temp").isValidMove(move);
+        return new Rook(super.getColor(),"temp",PieceType.ROOK).isValidMove(move)|| new Bishop(super.getColor(),"temp",PieceType.BISHOP).isValidMove(move);
     }
     @Override
     public Piece clone(){
-        Queen copy=new Queen(this.getColor(),this.getName());
-        copy.setHasMoved(this.getHasMoved());
-        return copy;
+        return new Queen(this);
     }
 }
