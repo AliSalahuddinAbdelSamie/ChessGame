@@ -4,7 +4,7 @@
  */
 package ChessCore;
 
-public class Player {
+public class Player implements Prototype {
     private int pawns;
     private int rooks;
     private int knights;
@@ -22,7 +22,16 @@ public class Player {
         queens=1;
         king=1;
     }
-
+    
+    private Player(Player player){
+        this.color=player.color;
+        this.pawns=player.pawns;
+        this.rooks=player.rooks;
+        this.knights=player.knights;
+        this.bishops=player.bishops;
+        this.queens=player.queens;
+        this.king=player.king;
+    }
     public PieceColor getColor() {
         return color;
     }
@@ -72,6 +81,11 @@ public class Player {
             queens++;
         if(piece instanceof Rook)
             rooks++;
+    }
+
+    @Override
+    public Player clone() {
+        return new Player(this);
     }
     
        

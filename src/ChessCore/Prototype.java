@@ -9,5 +9,5 @@ package ChessCore;
  * @author Aly
  */
 public interface Prototype {
-    Prototype Clone();
+    Prototype clone();
 }

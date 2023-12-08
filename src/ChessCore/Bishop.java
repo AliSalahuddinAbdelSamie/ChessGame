@@ -33,7 +33,7 @@ public class Bishop extends Piece {
     }
     
     @Override
-    public Piece Clone(){
+    public Piece clone(){
         return new Bishop(this);
     }
 }

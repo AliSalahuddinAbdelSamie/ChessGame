@@ -33,5 +33,5 @@ public abstract class Piece implements Prototype {
     }
       
     @Override
-    public abstract Piece Clone();
+    public abstract Piece clone();
 }

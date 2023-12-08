@@ -4,7 +4,7 @@
  */
 package ChessCore;
 
-public class Square {
+public class Square implements Prototype {
     private final int rowPos;
     private final int colPos;
     private Piece piece;
@@ -17,6 +17,13 @@ public class Square {
         this.rowPos=rowPos;
         this.colPos=colPos;
         this.piece=piece;
+    }
+    private Square(Square square){
+        this.rowPos=square.rowPos;
+        this.colPos=square.colPos;
+        if(square.getPiece()!=null)
+        this.piece=square.piece.clone();
+        else this.piece=null;
     }
     
     public Piece getPiece() {
@@ -36,6 +43,11 @@ public class Square {
     }
     public boolean isEmpty(){
         return piece==null;
+    }
+
+    @Override
+    public Square clone() {
+      return new Square(this);   
     }
     
 

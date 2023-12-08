@@ -4,7 +4,7 @@
  */
 package ChessCore;
 
-public class Move {
+public class Move implements Prototype {
     
     private final Square source;
     private final Square destination;
@@ -13,6 +13,11 @@ public class Move {
         this.source=source;
         this.destination=destination;
         status=MoveStatus.NORMAL;
+    }
+    private Move(Move move){
+        this.source=move.getSource().clone();
+        this.destination=move.getDestination().clone();
+        this.status=move.getStatus();
     }
 
     public MoveStatus getStatus() {
@@ -34,6 +39,11 @@ public class Move {
     }
     public String getPos(){
         return String.valueOf(source.getRowPos())+String.valueOf(source.getColPos())+" "+String.valueOf(destination.getRowPos())+String.valueOf(destination.getColPos());
+    }
+
+    @Override
+    public Move clone() {
+        return new Move(this);
     }
 
     

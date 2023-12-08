@@ -30,7 +30,7 @@ public class Rook extends Piece {
         return false;
     }
     @Override
-    public Piece Clone(){
+    public Piece clone(){
         Rook copy=new Rook(this.getColor(),this.getName());
         copy.setHasMoved(this.getHasMoved());
         return copy;

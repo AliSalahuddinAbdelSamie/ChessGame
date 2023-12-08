@@ -4,7 +4,6 @@
  */
 package ChessGui;
 
-import ChessCore.Bishop;
 import ChessCore.Board;
 import ChessCore.ChessGame;
 import ChessCore.ChessGame.Memento;
@@ -1561,7 +1560,7 @@ public class BoardFrame extends javax.swing.JFrame {
                         .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
-        jButton1.setText("jButton1");
+        jButton1.setText("undo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1575,7 +1574,7 @@ public class BoardFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(31, 31, 31))
         );
@@ -1806,7 +1805,8 @@ public class BoardFrame extends javax.swing.JFrame {
                     PieceColor color=game.promotionHandling(choice.charAt(0));
                     JLabel label=(JLabel)dest.getComponent(0);
                     changeLabel(label, color,choice.charAt(0));
-                    promotedPieces.add((myLabel)label);
+                    promotedPieces.add((myLabel)label); 
+                    highlightKingCheck();
                 }
             for(myLabel i:promotedPieces)
                 i.setMovesSincePromotion(i.getMovesSincePromotion()+1);

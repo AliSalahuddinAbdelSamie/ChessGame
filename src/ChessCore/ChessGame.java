@@ -10,8 +10,8 @@ import java.util.Stack;
 public class ChessGame  {
     private Board board;
     private Move lastMove;
-    private final Player player1;
-    private final Player player2;
+    private Player player1;
+    private Player player2;
     private Player currentPlayer;
     private GameStatus status;
     private Move currentMove;
@@ -385,7 +385,7 @@ public class ChessGame  {
         return capturedPiece;
     }
     public Memento savepoint(){
-        return new Memento(board,lastMove,currentPlayer,status,currentMove);
+        return new Memento(board,lastMove,currentPlayer,status,currentMove,player1,player2);
     }
     public void restoreToSavepoint(Memento memento){
         this.board=memento.getBoard();
@@ -393,24 +393,32 @@ public class ChessGame  {
         this.currentPlayer=memento.getCurrentPlayer();
         this.status=memento.getStatus();
         this.currentMove=memento.getCurrentMove();
-        
+        this.player1=memento.getPlayer1();
+        this.player2=memento.getPlayer2();
     }
     
     public static class Memento{
         private final Board board;
         private final Move lastMove;
+        private final Player player1;
+        private final Player player2;
         private final Player currentPlayer;
         private final GameStatus status;
         private final Move currentMove;
         
 
-        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove) {
-            this.board = board.Clone();
-            this.lastMove = lastMove;
+        private Memento(Board board, Move lastMove, Player currentPlayer, GameStatus status, Move currentMove,Player player1,Player player2) {
+            this.board = board.clone();
+            if(lastMove==null)
+                this.lastMove = null;
+            else this.lastMove = lastMove.clone();
             this.currentPlayer = currentPlayer;
             this.status = status;
-            this.currentMove = currentMove;
-            
+            if(currentMove==null)
+                this.currentMove = null;
+            else this.currentMove = currentMove.clone();
+            this.player1=player1.clone();
+            this.player2=player2.clone();
         }
 
         private Board getBoard() {
@@ -433,6 +441,14 @@ public class ChessGame  {
             return currentMove;
         }
 
+        private Player getPlayer1() {
+            return player1;
+        }
+
+        private Player getPlayer2() {
+            return player2;
+        }
+        
         
         
         

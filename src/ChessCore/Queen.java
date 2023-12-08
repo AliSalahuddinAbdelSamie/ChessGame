@@ -25,7 +25,7 @@ public class Queen extends Piece {
         return new Rook(super.getColor(),"temp").isValidMove(move)|| new Bishop(super.getColor(),"temp").isValidMove(move);
     }
     @Override
-    public Piece Clone(){
+    public Piece clone(){
         Queen copy=new Queen(this.getColor(),this.getName());
         copy.setHasMoved(this.getHasMoved());
         return copy;

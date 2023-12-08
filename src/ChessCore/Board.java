@@ -19,11 +19,11 @@ public class Board implements Prototype {
                 if(board.getSquare(i, j).getPiece()==null)
                     this.squares[i][j]=new Square(i,j,null);
                 else 
-                this.squares[i][j]=new Square(i,j,board.getSquare(i, j).getPiece().Clone());
+                this.squares[i][j]=new Square(i,j,board.getSquare(i, j).getPiece().clone());
             }
     }
     @Override
-    public Board Clone(){
+    public Board clone(){
         return new Board(this);
     }
     public void setupBoard(){
